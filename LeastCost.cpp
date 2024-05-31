@@ -58,13 +58,40 @@ int tspLeastCostSearch(const vector<vector<int>>& graph, int startNode) {
 }
 
 int main() {
-    // Example graph represented as a matrix
-    vector<vector<int>> graph = {
-        {0, 10, 15, 20},
-        {10, 0, 35, 25},
-        {15, 35, 0, 30},
-        {20, 25, 30, 0}
-    };
+    int option;
+    cout << "Choose an option:\n";
+    cout << "1. Execute with hardcoded matrix.\n";
+    cout << "0. Execute with input from keyboard.\n";
+    cout << "Enter your choice: ";
+    cin >> option;
+
+    vector<vector<int>> graph;
+
+    if (option == 1) {
+        // Hardcoded matrix
+        graph = {
+            {0, 10, 15, 20},
+            {10, 0, 35, 25},
+            {15, 35, 0, 30},
+            {20, 25, 30, 0}
+        };
+    } else if (option == 0) {
+        // Read matrix from keyboard
+        int size;
+        cout << "Enter the size of the matrix: ";
+        cin >> size;
+
+        graph.resize(size, vector<int>(size));
+        cout << "Enter the elements of the matrix:\n";
+        for (int i = 0; i < size; ++i) {
+            for (int j = 0; j < size; ++j) {
+                cin >> graph[i][j];
+            }
+        }
+    } else {
+        cout << "Invalid option! Exiting...\n";
+        return 1;
+    }
 
     int startNode = 0;
     int minCost = tspLeastCostSearch(graph, startNode);
@@ -73,3 +100,5 @@ int main() {
 
     return 0;
 }
+
+
